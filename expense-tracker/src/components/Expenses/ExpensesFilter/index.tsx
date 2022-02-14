@@ -6,7 +6,11 @@ const ExpensesFilter = () => {
 	return (
 		<div className={classes.filter}>
 			<p>Filter by year</p>
-			<SelectBox />
+
+			<div className={classes.wrap}>
+				<button>Hide Chart</button>
+				<SelectBox />
+			</div>
 		</div>
 	);
 };

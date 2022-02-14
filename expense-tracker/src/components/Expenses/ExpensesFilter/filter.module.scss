@@ -9,3 +9,15 @@
 		color: #333;
 	}
 }
+
+.wrap {
+	& > button {
+		padding: 0;
+		background-color: transparent;
+		border: none;
+		cursor: pointer;
+		color: #40005d;
+		margin-right: 1rem;
+		font-weight: 600;
+	}
+}

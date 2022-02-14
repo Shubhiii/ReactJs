@@ -1,41 +1,28 @@
-import React from "react";
-import Card from "../../shared/Card";
+import React, { useContext } from "react";
 import Container from "../../shared/container";
+import Layout from "../../shared/Layout";
+import ExpenseContext from "../../store/expenseContext";
 import ExpenseChart from "./ExpenseChart";
 import ExpenseList from "./ExpenseList";
 import ExpensesFilter from "./ExpensesFilter";
 
-const DUMMY_EXPENSES = [
-	{
-		id: "e1",
-		title: "Toilet Paper",
-		amount: 94.12,
-		date: new Date(2020, 7, 14),
-	},
-	{ id: "e2", title: "New TV", amount: 799.49, date: new Date(2021, 2, 12) },
-	{
-		id: "e3",
-		title: "Car Insurance",
-		amount: 294.67,
-		date: new Date(2021, 2, 28),
-	},
-	{
-		id: "e4",
-		title: "New Desk (Wooden)",
-		amount: 450,
-		date: new Date(2021, 5, 12),
-	},
-];
-
 const Expenses = () => {
+	const ctx = useContext(ExpenseContext);
+
+	const handleRemove = (id: number) => {
+		ctx.removeItem(id);
+	};
+
 	return (
-		<Container>
-			<ExpensesFilter />
+		<Layout>
+			<Container>
+				<ExpensesFilter />
 
-			<ExpenseChart />
+				<ExpenseChart />
 
-			<ExpenseList onRemoveExpense={() => null} items={DUMMY_EXPENSES} />
-		</Container>
+				<ExpenseList onRemoveExpense={handleRemove} items={ctx.items} />
+			</Container>
+		</Layout>
 	);
 };
 

@@ -5,11 +5,17 @@ interface IDescription {
 	title?: string;
 	price?: number;
 	id?: number;
+	onRemoveExpense?: any;
 }
 
-const Description: React.FC<IDescription> = ({ title, price, id }) => {
+const Description: React.FC<IDescription> = ({
+	title,
+	price,
+	id,
+	onRemoveExpense,
+}) => {
 	const handleDelete = () => {
-		console.log(id, "id");
+		onRemoveExpense(id);
 	};
 	return (
 		<div className={classes.description}>
@@ -18,7 +24,7 @@ const Description: React.FC<IDescription> = ({ title, price, id }) => {
 				<p>{`$${price}`}</p>
 			</h2>
 			{/* <div className={classes.price}></div> */}
-			<button type="button" onClick={handleDelete}>
+			<button type="button" onClick={handleDelete.bind(null, id)}>
 				Remove
 			</button>
 		</div>

@@ -1,7 +1,33 @@
 import React from "react";
+import classes from "./toast.module.scss";
 
-const Toast = () => {
-	return <h2>Toast</h2>;
+interface IToast {
+	message?: string;
+	error?: boolean;
+}
+
+const Toast: React.FC<IToast> = ({ message, error }) => {
+	const [showToast, setShowToast] = React.useState(true);
+
+	const toastClass = `${classes.toast} ${
+		showToast ? classes.fadeInLeft : classes.fadeOutLeft
+	}`;
+
+	setTimeout(() => {
+		setShowToast(false);
+	}, 5000);
+
+	const backgroundColor = error ? "red" : "green";
+
+	return (
+		<div className={toastClass} style={{ backgroundColor }}>
+			{message}
+		</div>
+	);
+};
+
+Toast.defaultProps = {
+	message: "Dummy Message",
 };
 
 export default Toast;

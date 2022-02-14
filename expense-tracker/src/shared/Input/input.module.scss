@@ -1,7 +1,11 @@
 @import "../../theme/variables.scss";
 
 .form-control {
-	width: calc(100% / 3);
+	// width: calc(100% / 3);
+
+	& + .form-control {
+		margin-top: 1rem;
+	}
 
 	&.invalid {
 		input {
@@ -11,7 +15,7 @@
 	}
 
 	label {
-		font-weight: bold;
+		font-weight: 600;
 		margin-bottom: 0.5rem;
 		display: block;
 	}

@@ -7,12 +7,17 @@ interface IItem {
 	onRemoveExpense: any;
 }
 
-const Item: React.FC<IItem> = ({ data }) => {
+const Item: React.FC<IItem> = ({ data, onRemoveExpense }) => {
 	return (
 		<>
 			<li>
 				<Date date={data.date} />
-				<Description title={data.title} price={data.amount} id={data.id} />
+				<Description
+					title={data.title}
+					onRemoveExpense={onRemoveExpense}
+					price={data.amount}
+					id={data.id}
+				/>
 			</li>
 		</>
 	);
