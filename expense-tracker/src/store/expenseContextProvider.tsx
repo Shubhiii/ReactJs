@@ -23,16 +23,30 @@ const DUMMY_EXPENSES = [
 	},
 ];
 
+let savedExpenses: any = [];
+
+const data: any = localStorage.getItem("expenses");
+if (data !== null) {
+	const storeItem = JSON.parse(data);
+
+	savedExpenses = storeItem.map((item: any) => {
+		return {
+			...item,
+			date: new Date(item.date),
+		};
+	});
+} else {
+	console.log("No Expenses Saved!");
+}
+
 const defaultExpense = {
-	items: [],
-	// items: DUMMY_EXPENSES,
+	items: savedExpenses.length !== 0 ? savedExpenses : [],
+	// items: [],
 };
 
 const expenseReducer = (state: any, action: any) => {
 	if (action.type === "ADD") {
-		const updatedItems = state.items.concat(action.item);
-
-		// const updatedItems = [...state.items, action.item];
+		const updatedItems = [action.item, ...state.items];
 
 		return {
 			items: updatedItems,
@@ -63,11 +77,19 @@ const ExpenseProvider: React.FC = ({ children }) => {
 		dispatch({ type: "REMOVE", id: id });
 	};
 
-	const expenseCtx = {
+	const expenseCtx: any = {
 		items: state.items,
 		addItem: onAddExpense,
 		removeItem: onRemoveExpense,
 	};
+
+	React.useEffect(() => {
+		if (expenseCtx.items.length !== 0) {
+			localStorage.setItem("expenses", JSON.stringify(expenseCtx.items));
+		} else {
+			localStorage.removeItem("expenses");
+		}
+	}, [expenseCtx.items]);
 
 	return (
 		<ExpenseContext.Provider value={expenseCtx}>

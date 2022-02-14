@@ -1,23 +1,16 @@
 import React from "react";
 import "./App.scss";
-import {
-	BrowserRouter,
-	Routes,
-	Route,
-	Navigate,
-	useNavigate,
-} from "react-router-dom";
-import CreateExpense from "./components/CreateExpense";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Expenses from "./components/Expenses";
-import Header from "./shared/Header";
-import Wrapper from "./shared/Wrapper";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import ErrorPage from "./components/ErrorPage";
 import ExpenseProvider from "./store/expenseContextProvider";
 
 function App() {
-	const loginStatus = localStorage.getItem("isLoggedIn");
+	const loginStatus = React.useRef(localStorage.getItem("isLoggedIn"));
+
+	console.log(loginStatus.current);
 
 	return (
 		<ExpenseProvider>
@@ -34,7 +27,7 @@ function App() {
 						element={
 							<Navigate
 								replace
-								to={loginStatus === "1" ? "/expenses" : "/login"}
+								to={loginStatus.current !== null ? "/expenses" : "/login"}
 							/>
 						}
 					/>
