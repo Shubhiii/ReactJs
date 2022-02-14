@@ -1,5 +1,7 @@
 import React from "react";
 import classes from "./input.module.scss";
+import SHOW_PASSWORD from "../../images/show.png";
+import HIDE_PASSWORD from "../../images/hide.png";
 
 export type inputType = string | number;
 
@@ -18,6 +20,7 @@ interface IInput {
 	hasError?: boolean;
 	onBlur: React.FocusEventHandler<HTMLInputElement>;
 	errorMessage?: string;
+	handlePasswordVisibility?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
 const Input: React.FC<IInput> = ({
@@ -29,6 +32,7 @@ const Input: React.FC<IInput> = ({
 	hasError,
 	onBlur,
 	errorMessage,
+	handlePasswordVisibility,
 }) => {
 	let formClass = hasError
 		? `${classes["form-control"]} ${classes.invalid}`
@@ -37,14 +41,26 @@ const Input: React.FC<IInput> = ({
 	return (
 		<div className={formClass}>
 			<label>{label}</label>
-			<input
-				type={type}
-				autoComplete="off"
-				onBlur={onBlur}
-				onChange={onChange}
-				value={value}
-				{...inputProps}
-			/>
+			<div className={classes["input-with-icon"]}>
+				<input
+					type={type}
+					autoComplete="off"
+					onBlur={onBlur}
+					onChange={onChange}
+					value={value}
+					{...inputProps}
+				/>
+
+				{label === "Password" && (
+					<button type="button" onClick={handlePasswordVisibility}>
+						{type === "password" ? (
+							<img src={SHOW_PASSWORD} alt="Password" />
+						) : (
+							<img src={HIDE_PASSWORD} alt="Password" />
+						)}
+					</button>
+				)}
+			</div>
 			{hasError && <p>{errorMessage}</p>}
 		</div>
 	);

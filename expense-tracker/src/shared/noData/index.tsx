@@ -1,5 +1,4 @@
 import React from "react";
-import Card from "../Card";
 import LOGO from "../../images/logo.png";
 import classes from "./nodata.module.scss";
 

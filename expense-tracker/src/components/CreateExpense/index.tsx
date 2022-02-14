@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React from "react";
 import useInput from "../../hooks/useInput";
 import Button from "../../shared/Button";
 import Input from "../../shared/Input";
@@ -103,8 +103,8 @@ const CreateExpense: React.FC<ICreateExpense> = ({ onClose, onAdd }) => {
 						value={date}
 						errorMessage={dateErrorMessage}
 						inputProps={{
-							min: "2019-01-01",
-							max: "2022-12-31",
+							min: new Date().toISOString().slice(0, 10),
+							max: "2025-12-31",
 						}}
 					/>
 				</div>

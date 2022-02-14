@@ -10,8 +10,6 @@ import ExpenseProvider from "./store/expenseContextProvider";
 function App() {
 	const loginStatus = React.useRef(localStorage.getItem("isLoggedIn"));
 
-	console.log(loginStatus.current);
-
 	return (
 		<ExpenseProvider>
 			<BrowserRouter>

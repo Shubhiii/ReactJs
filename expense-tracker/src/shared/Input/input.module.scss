@@ -37,3 +37,25 @@
 		margin: 0.3rem 0 0;
 	}
 }
+
+.input-with-icon {
+	position: relative;
+
+	button {
+		position: absolute;
+		cursor: pointer;
+		right: 10px;
+		top: 50%;
+		width: auto;
+		height: auto;
+		padding: 0;
+		margin: 0;
+		border: none;
+		background-color: transparent;
+		transform: translateY(-50%);
+	}
+	img {
+		height: 24px;
+		display: block;
+	}
+}

@@ -19,6 +19,9 @@ const DUMMY_USER = {
 
 const Login = () => {
 	const [show, setShow] = React.useState(false);
+
+	const [passwordShow, setPasswordShow] = React.useState(false);
+
 	const history = useNavigate();
 
 	const {
@@ -59,6 +62,10 @@ const Login = () => {
 		passwordHandleReset();
 	};
 
+	const handleVisible = () => {
+		setPasswordShow((prevState) => !prevState);
+	};
+
 	let formIsValid = false;
 
 	formIsValid = emailIsValid && passwordIsValid;
@@ -83,12 +90,13 @@ const Login = () => {
 
 						<Input
 							label="Password"
-							type="password"
+							type={!passwordShow ? "password" : "text"}
 							onBlur={passwordHandleBlur}
 							onChange={passwordHandleChange}
 							value={passwordValue}
 							hasError={passwordHasError}
 							errorMessage={passwordErrorMessage}
+							handlePasswordVisibility={handleVisible}
 						/>
 
 						<Button isDisable={!formIsValid}>Sign In</Button>
