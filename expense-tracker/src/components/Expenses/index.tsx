@@ -8,8 +8,23 @@ import ExpenseList from "./ExpenseList";
 import ExpensesFilter from "./ExpensesFilter";
 
 const Expenses = () => {
+	const currentYear = new Date().getFullYear();
+
 	const [showChart, setShowChart] = React.useState(true);
+
+	const [selectedYear, setSelectedYear] = React.useState(
+		currentYear.toString()
+	);
+
+	const handleChange = (year: string) => {
+		setSelectedYear(year);
+	};
+
 	const ctx = useContext(ExpenseContext);
+
+	const filteredItems = ctx.items.filter((item: any) => {
+		return item.date.getFullYear().toString() === selectedYear;
+	});
 
 	const handleRemove = (id: number) => {
 		ctx.removeItem(id);
@@ -24,11 +39,16 @@ const Expenses = () => {
 	if (ctx.items.length) {
 		expenses = (
 			<>
-				<ExpensesFilter toggleText={showChart} toggleChart={toggleChart} />
+				<ExpensesFilter
+					onChangeYear={handleChange}
+					toggleText={showChart}
+					toggleChart={toggleChart}
+					selectedYear={selectedYear}
+				/>
 
-				{showChart && <ExpenseChart />}
+				{showChart && <ExpenseChart expenses={filteredItems} />}
 
-				<ExpenseList onRemoveExpense={handleRemove} items={ctx.items} />
+				<ExpenseList onRemoveExpense={handleRemove} items={filteredItems} />
 			</>
 		);
 	}

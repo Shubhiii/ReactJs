@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../../../shared/Card";
-import Bar from "./Bar";
+import Chart from "./Chart";
 import classes from "./chart.module.scss";
 
 const chartDataPoints = [
@@ -18,13 +18,16 @@ const chartDataPoints = [
 	{ label: "Dec", value: 0 },
 ];
 
-const ExpenseChart = () => {
+const ExpenseChart = ({ expenses }: any) => {
+	expenses.forEach((expense: any) => {
+		const expenseMonth = expense.date.getMonth();
+		chartDataPoints[expenseMonth].value += expense.amount;
+	});
+
 	return (
 		<Card>
 			<div className={classes["chart-wrap"]}>
-				{chartDataPoints.map((data, i) => (
-					<Bar key={i} label={data.label} value={data.value} />
-				))}
+				<Chart chartDataPoints={chartDataPoints} />
 			</div>
 		</Card>
 	);

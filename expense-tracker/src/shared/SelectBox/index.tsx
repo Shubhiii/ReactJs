@@ -7,7 +7,7 @@ interface ISelectBox {
 		value: string;
 	}[];
 	selected?: string;
-	dropdownChangeHandler?: () => void;
+	dropdownChangeHandler?: any;
 }
 
 const DUMMY_OPTIONS = [
@@ -20,12 +20,14 @@ const SelectBox: React.FC<ISelectBox> = ({
 	selected,
 	dropdownChangeHandler,
 }) => {
-	options = DUMMY_OPTIONS;
+	const handleYearSelect = (e: { target: { value: any } }) => {
+		dropdownChangeHandler(e.target.value);
+	};
 	return (
 		<select
 			className={classes.select}
 			value={selected}
-			onChange={dropdownChangeHandler}
+			onChange={handleYearSelect}
 		>
 			{options &&
 				options.map((option: { id: number; value: string }) => (

@@ -50,13 +50,13 @@ const CreateExpense: React.FC<ICreateExpense> = ({ onClose, onAdd }) => {
 
 		const expenseData = {
 			title: title,
-			amount: amount,
+			amount: +amount,
 			date: new Date(date),
 		};
 
 		onAdd(expenseData);
 
-		// console.log(expenseData, "expenseData");
+		console.log(expenseData, "expenseData");
 
 		titleReset();
 
@@ -103,7 +103,8 @@ const CreateExpense: React.FC<ICreateExpense> = ({ onClose, onAdd }) => {
 						value={date}
 						errorMessage={dateErrorMessage}
 						inputProps={{
-							min: new Date().toISOString().slice(0, 10),
+							// min: new Date().toISOString().slice(0, 10),
+							min: "2022-01-01",
 							max: "2025-12-31",
 						}}
 					/>
