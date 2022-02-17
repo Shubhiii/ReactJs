@@ -1,6 +1,7 @@
 import React from "react";
 import Date from "../Date";
 import Description from "../Description";
+import classes from "./item.module.scss";
 
 interface IItem {
 	data: any;
@@ -10,7 +11,10 @@ interface IItem {
 const Item: React.FC<IItem> = ({ data, onRemoveExpense }) => {
 	return (
 		<>
-			<li>
+			<li
+				style={{ animationDelay: data.id + "s" }}
+				className={classes.animateLeft}
+			>
 				<Date date={data.date} />
 				<Description
 					title={data.title}

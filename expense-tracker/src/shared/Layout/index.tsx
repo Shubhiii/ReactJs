@@ -18,11 +18,12 @@ const Layout: React.FC = ({ children }) => {
 	};
 
 	const onAdd = (item: any) => {
-		setId((prevId) => prevId + 1);
 		const expenseData = {
 			id: id,
 			...item,
 		};
+
+		setId((prevId) => prevId + 1);
 		ctx.addItem(expenseData);
 		setOpen(false);
 	};

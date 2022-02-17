@@ -24,9 +24,7 @@ const ExpensesFilter: React.FC<IExpensesFilter> = ({
 
 	const years: any = new Set(filterYear);
 
-	// const reverseYear = Array.from(years).reverse();
-
-	const reverseYear = Array.from(years);
+	const reverseYear = Array.from(years).reverse();
 
 	const updatedYears = reverseYear.map((currYear: any, i: any) => {
 		return {
@@ -43,11 +41,13 @@ const ExpensesFilter: React.FC<IExpensesFilter> = ({
 				<button onClick={toggleChart}>
 					{toggleText ? "Hide" : "Show"} Chart
 				</button>
-				<SelectBox
-					selected={selectedYear}
-					dropdownChangeHandler={onChangeYear}
-					options={updatedYears}
-				/>
+				{reverseYear.length > 1 && (
+					<SelectBox
+						selected={selectedYear}
+						dropdownChangeHandler={onChangeYear}
+						options={updatedYears}
+					/>
+				)}
 			</div>
 		</div>
 	);

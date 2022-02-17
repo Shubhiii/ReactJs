@@ -2,26 +2,22 @@ import React from "react";
 import Bar from "../Bar";
 
 interface IChart {
-	chartDataPoints: any;
+	dataPoints: any;
 }
 
-const Chart: React.FC<IChart> = ({ chartDataPoints }) => {
-	const dataPointValues = chartDataPoints.map(
-		(dataPoint: { value: any }) => dataPoint.value
-	);
+const Chart: React.FC<IChart> = ({ dataPoints }) => {
+	const dataPointValues = dataPoints.map((dataPoint: any) => dataPoint.value);
 	const totalMaximum = Math.max(...dataPointValues);
 	return (
 		<>
-			{chartDataPoints.map(
-				(data: { label: string; value: number }, i: number) => (
-					<Bar
-						maxValue={totalMaximum}
-						key={i}
-						label={data.label}
-						value={data.value}
-					/>
-				)
-			)}
+			{dataPoints.map((dataPoint: any, i: number) => (
+				<Bar
+					key={dataPoint.label}
+					value={dataPoint.value}
+					maxValue={totalMaximum}
+					label={dataPoint.label}
+				/>
+			))}
 		</>
 	);
 };

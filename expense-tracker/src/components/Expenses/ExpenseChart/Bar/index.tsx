@@ -8,20 +8,16 @@ interface IBar {
 }
 
 const Bar: React.FC<IBar> = ({ label, maxValue, value }) => {
-	// let height = "0%";
+	let barFillHeight = "0%";
 
-	let maxHeight =
-		maxValue > 0 ? Math.round((value / maxValue) * 100) + "%" : "0%";
+	if (maxValue > 0) {
+		barFillHeight = Math.round((value / maxValue) * 100) + "%";
+	}
 
-	// if (maxValue > 0) {
-	// 	height = Math.round((value / maxValue) * 100) + "%";
-	// }
-
-	// console.log(height, "height");
 	return (
 		<div className={classes.wrap}>
 			<div className={classes.bar}>
-				<span style={{ height: maxHeight }} />
+				<span style={{ height: barFillHeight }} />
 			</div>
 			<p>{label}</p>
 		</div>

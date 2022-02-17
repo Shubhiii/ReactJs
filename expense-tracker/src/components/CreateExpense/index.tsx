@@ -56,8 +56,6 @@ const CreateExpense: React.FC<ICreateExpense> = ({ onClose, onAdd }) => {
 
 		onAdd(expenseData);
 
-		console.log(expenseData, "expenseData");
-
 		titleReset();
 
 		amountReset();

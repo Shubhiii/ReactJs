@@ -40,13 +40,12 @@ if (data !== null) {
 }
 
 const defaultExpense = {
-	items: savedExpenses.length !== 0 ? savedExpenses : [],
-	// items: [],
+	items: savedExpenses.length !== 0 ? savedExpenses : [...DUMMY_EXPENSES], //...DUMMY_EXPENSES
 };
 
 const expenseReducer = (state: any, action: any) => {
 	if (action.type === "ADD") {
-		const updatedItems = [action.item, ...state.items];
+		const updatedItems = [...state.items, action.item];
 
 		return {
 			items: updatedItems,

@@ -29,12 +29,17 @@ const SelectBox: React.FC<ISelectBox> = ({
 			value={selected}
 			onChange={handleYearSelect}
 		>
+			<option value="all">All</option>
 			{options &&
 				options.map((option: { id: number; value: string }) => (
 					<option key={option.id} value={option.value}>
 						{option.value}
 					</option>
 				))}
+			{/* <option value="2022">2022</option>
+			<option value="2021">2021</option>
+			<option value="2020">2020</option>
+			<option value="2019">2019</option> */}
 		</select>
 	);
 };
